@@ -1,0 +1,14 @@
+- hosts: all
+
+  tasks:
+  - name: create a docker image with deployed waf file
+    command: docker build -t daeunxx/ansible .
+    args: 
+        chdir: /root
+    
+  - name: push the image on Docker Hub
+    command: docker push daeunxx/ansible
+
+  - name: remove the docker image from the ansible server
+    command: docker rmi daeunxx/ansible  
+    ignore_errors: yes
