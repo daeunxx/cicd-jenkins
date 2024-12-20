@@ -3,36 +3,58 @@ pipeline {
     stages {
         stage('Git clone') {
             steps {
-                git 'https://github.com/joneconsulting/jenkins_pipeline_script';
+                git branch: 'main', credentialsId: 'a2904917-a7d6-4d31-aac4-9874b3d1f9c4', url: 'https://github.com/daeunxx/cicd-jenkins'
             }
         }
 
         stage('Compile') {
             steps {
                 echo "Compiled successfully!";
-                sh './build.sh'
+                sh './pipeline_script/build.sh'
             }
         }
 
         stage('JUnit') {
             steps {
                 echo "JUnit passed successfully!";
-                sh './unit.sh'
+                sh './pipeline_script/unit.sh'
             }
         }
 
         stage('Code Analysis') {
             steps {
                 echo "Code Analysis completed successfully!";
-                sh './quality.sh'
+                sh './pipeline_script/quality.sh'
             }
         }
 
         stage('Deploy') {
             steps {
                 echo "Deployed successfully!";
-                sh './deploy.sh'
+                sh './pipeline_script/deploy.sh'
             }
+        }
+    }
+
+    post {
+        always {
+            echo "This will always run"
+        }
+
+        success {
+            echo "This will run when the run finished successfully"
+        }
+
+        failure {
+            echo "This will run if failed"
+        }
+
+        unstable {
+            echo "This will run when the run was marked as unstable"
+        }
+
+        changed {
+            echo "This will run when the state of the pipeline has changed"
         }
     }
 }
