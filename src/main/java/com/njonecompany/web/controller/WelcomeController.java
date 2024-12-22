@@ -11,21 +11,21 @@ import java.util.Date;
 @Controller
 public class WelcomeController {
 
-    private final Logger logger = LoggerFactory.getLogger(WelcomeController.class);
+  private final Logger logger = LoggerFactory.getLogger(WelcomeController.class);
 
-    @GetMapping("/")
-    public String index(Model model) {
-        logger.debug("Welcome to njonecompany.com...");
+  @GetMapping("/")
+  public String index(Model model) {
+//    logger.debug("Welcome to daeun.com...");
+    System.out.println("index is called by GET /");
 
-        model.addAttribute("msg", getMessage());
-        model.addAttribute("today", new Date());
-        System.out.println(model.getAttribute("today"));
-        return "index";
+    model.addAttribute("msg", getMessage());
+    model.addAttribute("today", new Date());
+    System.out.println(model.getAttribute("today"));
+    return "index";
+  }
 
-    }
-
-    private String getMessage() {
-        return "Hi, there";
-    }
+  private String getMessage() {
+    return "Hi, there";
+  }
 
 }
