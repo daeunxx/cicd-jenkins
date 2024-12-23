@@ -16,26 +16,26 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringJUnitWebConfig(SpringConfig.class)
 public class TestWelcome {
 
-    private MockMvc mockMvc;
+  private MockMvc mockMvc;
 
-    @Autowired
-    private WebApplicationContext webAppContext;
+  @Autowired
+  private WebApplicationContext webAppContext;
 
-    @BeforeEach
-    public void setup() {
-        mockMvc = MockMvcBuilders.webAppContextSetup(webAppContext).build();
-    }
+  @BeforeEach
+  public void setup() {
+    mockMvc = MockMvcBuilders.webAppContextSetup(webAppContext).build();
+  }
 
-    @Test
-    public void testWelcome() throws Exception {
+  @Test
+  public void testWelcome() throws Exception {
 
-        this.mockMvc.perform(
-                get("/"))
-                .andDo(print())
-                .andExpect(status().isOk())
-                .andExpect(view().name("index"))
-                .andExpect(forwardedUrl("/WEB-INF/views/index.jsp"))
-                .andExpect(model().attribute("msg", "Hi, there"));
-    }
+    this.mockMvc.perform(
+            get("/"))
+        .andDo(print())
+        .andExpect(status().isOk())
+        .andExpect(view().name("index"))
+        .andExpect(forwardedUrl("/WEB-INF/views/index.jsp"))
+        .andExpect(model().attribute("msg", "Hi, there"));
+  }
 
 }
